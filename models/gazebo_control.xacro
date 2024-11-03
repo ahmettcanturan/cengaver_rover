@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+    <gazebo reference="front_left_wheel">
+        <mu1 value="0.2" />
+        <mu2 value="0.2" />
+    </gazebo>
+    <gazebo reference="front_right_wheel">
+        <mu1 value="0.2" />
+        <mu2 value="0.2" />
+    </gazebo>
+    <gazebo reference="back_left_wheel">
+        <mu1 value="0.2" />
+        <mu2 value="0.2" />
+    </gazebo>
+    <gazebo reference="back_right_wheel">
+        <mu1 value="0.2" />
+        <mu2 value="0.2" />
+    </gazebo>
+
+    <gazebo>
+        <plugin name="differential_drive_controller_front" filename="libgazebo_ros_diff_drive.so">
+            <left_joint>front_left_wheel_joint</left_joint>
+            <right_joint>front_right_wheel_joint</right_joint>
+            <wheel_separation>${(0.27998 + 0.114)*2}</wheel_separation>
+            <wheel_diameter>${2*0.11736}</wheel_diameter>
+            <!-- Output -->
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_link</robot_base_frame>
+
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
+        </plugin>
+    </gazebo>
+
+    <gazebo>
+        <plugin name="differential_drive_controller_back" filename="libgazebo_ros_diff_drive.so">
+            <left_joint>back_left_wheel_joint</left_joint>
+            <right_joint>back_right_wheel_joint</right_joint>
+            <wheel_separation>${(0.27998 + 0.114)*2}</wheel_separation>
+            <wheel_diameter>${2*0.11736}</wheel_diameter>
+            <!-- Output -->
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_link</robot_base_frame>
+
+            <publish_odom>false</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
+        </plugin>
+    </gazebo>
+
+</robot>
